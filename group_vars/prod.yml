@@ -6,6 +6,7 @@ groups_to_create:
   - name: mis
     gid: 10300
   - name: iaps
+  - name: dba
 
 users:
   #/dev/jenkins/hmpps/integration/user/name
