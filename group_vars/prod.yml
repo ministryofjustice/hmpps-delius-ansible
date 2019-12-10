@@ -282,7 +282,7 @@ users:
     shell: /bin/bash
     update_password: on_create  
  
- - username: wfairbanks
+  - username: wfairbanks
     name: "Will Fairbanks"
     groups:
       - webops
