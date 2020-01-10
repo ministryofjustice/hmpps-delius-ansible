@@ -131,3 +131,45 @@ Password expires after 60 days. So will need changing then exiting and deleting 
 ```
 ssh -L localhost:1521:localhost:1521 delius-db-1.test.delius.probation.hmpps.dsd.io
 ```
+### PRE-COMMIT Hook
+
+This project supports protecting yaml files from bad formatting with the "pre-commit" tool.
+Install on local machine using instructions: ( https://pre-commit.com )
+
+
+Before you can run hooks, you need to have the pre-commit package manager installed.
+
+Using pip:
+```
+pip install pre-commit
+```
+Non-administrative installation:
+
+to upgrade: run again, to uninstall: pass uninstall to python
+does not work on platforms without symlink support (windows)
+```
+curl https://pre-commit.com/install-local.py | python -
+```
+In a python project, add the following to your requirements.txt (or requirements-dev.txt):
+
+pre-commit
+Using homebrew:
+```
+brew install pre-commit
+```
+Using conda (via conda-forge):
+```
+conda install -c conda-forge pre-commit
+```
+
+Then from root of project run
+```
+pre-commit install
+```
+
+Now you should have the pre-commit hook running whwn you commit.
+
+To check prior to committing you can use this command
+```
+pre-commit run --all-files
+```
