@@ -131,7 +131,19 @@ Password expires after 60 days. So will need changing then exiting and deleting 
 ```
 ssh -L localhost:1521:localhost:1521 delius-db-1.test.delius.probation.hmpps.dsd.io
 ```
-### PRE-COMMIT Hook
+
+### Notes on Windows SSH access
+
+* OpenSSH client is installed by default in Windows 10 as of April 2018, and no longer needs to be enabled manually.
+  This allows the same SSH commands to be used as MacOS/Linux with minimal changes.
+* Using `~` for the output paths in the `ssh-keygen` commands may cause issues.
+  If you get *No such file or directory* errors, try referencing the full path instead (eg. `C:\Users\username\.ssh\moj_dev_rsa`).
+* In the ProxyCommand lines in `.ssh/config`, `ssh` must be replaced with `ssh.exe`.
+* When using control sockets, you may get the error *getsockname failed: Not a socket*.
+  If so, the easiest thing to do is remove the `ControlMaster`, `ControlPath` and `ControlPersist` lines from `.ssh/config`.
+  Note: the users' SSH password will then need to be entered on each new connection.
+
+## PRE-COMMIT Hook
 
 This project supports protecting yaml files from bad formatting with the "pre-commit" tool.
 Install on local machine using instructions: ( https://pre-commit.com )
