@@ -626,7 +626,7 @@ users:
     update_password: on_create
 
   - username: cbarnett
-    name: "Callum Barnett"
+    name: "Calum Barnett"
     groups:
       - dps
     ssh_key:
