@@ -27,7 +27,7 @@ def run_ansible(environment_type) {
 
 pipeline {
 
-    agent { label "jenkins_slave" }
+    agent { label "jenkins_agent" }
 
     stages {
 
