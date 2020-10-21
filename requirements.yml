@@ -2,5 +2,5 @@
 - src: jeffwidman.yum-cron
 - src: https://github.com/lazzurs/ansible-ssh-hardening
   version: feature/password_key_2fa
-- src: singleplatform-eng.users
+- src: https://github.com/ministryofjustice/ansible-users
 - src: weareinteractive.sudo
