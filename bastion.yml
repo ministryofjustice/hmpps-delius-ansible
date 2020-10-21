@@ -2,7 +2,7 @@
   become: true
   hosts: all
   roles:
-    - singleplatform-eng.users
+    - ansible-users
     - jeffwidman.yum-cron
     - ansible-ssh-hardening
     - weareinteractive.sudo
