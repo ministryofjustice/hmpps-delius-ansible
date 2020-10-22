@@ -29,6 +29,9 @@ change their password on next login.
     sudo passwd -e username
 
 
+## Enable/Disable Civica User access
+
+Please see [the CivicaOnOffboarding README](/CivicaOnOffboarding.md)
 ## Ansible playbook
 
 First you will need all the external roles.
