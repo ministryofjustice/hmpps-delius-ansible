@@ -6,7 +6,7 @@
 
 def prepare_env() {
     sh '''
-        docker pull mojdigitalstudio/hmpps-ansible-builder:latest
+        docker pull mojdigitalstudio/hmpps-ansible-builder:0.40.0
     '''
 }
 
@@ -18,7 +18,7 @@ def run_ansible(environment_type) {
             -v ~/.ssh:/home/tools/.ssh \
             -v $SSH_AUTH_SOCK:/ssh-agent \
             -e SSH_AUTH_SOCK=/ssh-agent \
-            mojdigitalstudio/hmpps-ansible-builder bash -c \"ansible-galaxy install -r requirements.yml && \
+            mojdigitalstudio/hmpps-ansible-builder:0.40.0 bash -c \"ansible-galaxy install -r requirements.yml && \
              ansible-playbook -u jenkins --ssh-extra-args='-o StrictHostKeyChecking=no' -i inventory/${environment_type} bastion.yml\"
             set -x
         """
