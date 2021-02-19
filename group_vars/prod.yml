@@ -38,7 +38,7 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-   - username: sjames
+  - username: sjames
     name: "Steve James"
     groups:
       - webops
