@@ -638,7 +638,6 @@ users:
       - dps
     ssh_key:
       - <<PASTE PUBLIC KEY HERE>>
-
     shell: /bin/bash
     update_password: on_create
 
