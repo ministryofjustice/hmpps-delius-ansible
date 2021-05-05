@@ -468,6 +468,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: screasy
+    name: "Simon Creasy"
+    groups:
+      - vcms
+    shell: /bin/bash
+    update_password: on_create
+
   - username: sbarnes
     name: "Simon Barnes"
     # groups:
