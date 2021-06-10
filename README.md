@@ -88,14 +88,14 @@ ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
 
 * Mac/Linux
 ```
-Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io
+Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_dev_rsa
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_dev_bastion
 
-Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion
+Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   HostName ssh.bastion-dev.probation.hmpps.dsd.io
   ControlMaster auto
   ControlPath /tmp/ctrl_dev_bastion
@@ -114,7 +114,7 @@ Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
 
-Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion
+Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   HostName ssh.bastion-prod.probation.hmpps.dsd.io
   ControlMaster auto
   ControlPath /tmp/ctrl_prod_bastion
