@@ -64,24 +64,38 @@ or
 These simple snippets can make it easier to onboard a new user.
 
 ## SSH Key Pair Generation
+* Mac/Linux
+```bash
+# MOJ DEV - NON-PROD
+ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_dev_rsa
 
-    ## MOJ DEV - NON-PROD
-    ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_dev_rsa
+# MOJ PROD - PRODUCTION DATA ENVS
+ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
+```
 
-    ## MOJ PROD - PRODUCTION DATA ENVS
-    ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
+* Windows
+```cmd
+# Create the .ssh directory (required on windows)
+mkdir %USERPROFILE%/.ssh
+
+# Generate dev and prod keypairs
+ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_dev_rsa
+ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
+```
 
 ## SSH Config Example
 
+
+* Mac/Linux
 ```
-Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io
+Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_dev_rsa
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_dev_bastion
 
-Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion
+Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   HostName ssh.bastion-dev.probation.hmpps.dsd.io
   ControlMaster auto
   ControlPath /tmp/ctrl_dev_bastion
@@ -93,7 +107,6 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion
   ProxyCommand none
 
 ## MOJ PROD - PRODUCTION DATA ENVS
-
 Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
@@ -101,7 +114,7 @@ Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
 
-Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion
+Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   HostName ssh.bastion-prod.probation.hmpps.dsd.io
   ControlMaster auto
   ControlPath /tmp/ctrl_prod_bastion
@@ -112,6 +125,39 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion
   IdentityFile ~/.ssh/moj_prod_rsa
   ProxyCommand none
 ```
+
+* Windows
+
+Replace `USERNAME` with the SSH username (e.g. `jbloggs`), and replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`). 
+
+Note: this example assumes the user doesn't have any pre-existing SSH config.
+
+<pre>
+Host *
+ User <b>USERNAME</b>
+ ServerAliveInterval 20
+ StrictHostKeyChecking no
+ UserKnownHostsFile /dev/null
+
+Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.dsd.io
+ Hostname ssh.bastion-dev.probation.hmpps.dsd.io
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+
+Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
+ Hostname ssh.bastion-prod.probation.hmpps.dsd.io
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+
+Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
+ ForwardAgent yes
+ ProxyCommand ssh -W %h:%p moj_dev_bastion
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+
+Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.* 
+ ForwardAgent yes
+ ProxyCommand ssh -W %h:%p moj_prod_bastion
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+</pre>
+
 
 ## User Notes
 
@@ -139,6 +185,7 @@ ssh -L localhost:1521:localhost:1521 delius-db-1.test.delius.probation.hmpps.dsd
 
 * OpenSSH client is installed by default in Windows 10 as of April 2018, and no longer needs to be enabled manually.
   This allows the same SSH commands to be used as MacOS/Linux with minimal changes.
+* If the built-in OpenSSH client does not work, try using ssh from [Git Bash](https://git-scm.com/downloads) instead.
 * Using `~` for the output paths in the `ssh-keygen` commands may cause issues.
   If you get *No such file or directory* errors, try referencing the full path instead (eg. `C:\Users\username\.ssh\moj_dev_rsa`).
 * In the ProxyCommand lines in `.ssh/config`, `ssh` must be replaced with `ssh.exe`.
