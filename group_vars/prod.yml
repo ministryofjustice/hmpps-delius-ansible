@@ -761,8 +761,8 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: smorris
-    name: "Sebastian Morris"
+  - username: snorris
+    name: "Sebastian Norris"
     groups:
       - webops
     ssh_key:
@@ -792,3 +792,4 @@ users_deleted:
   - username: vvandanapu
   - username: mspasov
   - username: mbutler
+  - username: smorris
