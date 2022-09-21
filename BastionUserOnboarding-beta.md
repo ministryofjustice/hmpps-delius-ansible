@@ -43,6 +43,7 @@ ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
 * Mac/Linux
 
 Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs
+Replace `DEV_BASTION_INSTANCE_ID` or `PROD_BASTION_INSTANCE_ID` with the instance ids
 ```
 Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
@@ -60,7 +61,7 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_dev_rsa
-  ProxyCommand sh -c "aws ssm start-session --target i-094ea35e707a320d4 --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+  ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 ## MOJ PROD - PRODUCTION DATA ENVS
 Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
@@ -79,7 +80,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
-  ProxyCommand sh -c "aws ssm start-session --target i-0fba91ad072312e75 --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+  ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID  --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
 
 * Windows
@@ -98,12 +99,12 @@ Host *
 Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.dsd.io
  Hostname ssh.bastion-dev.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
- ProxyCommand sh -c "aws ssm start-session --target i-094ea35e707a320d4 --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+ ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
- ProxyCommand sh -c "aws ssm start-session --target i-0fba91ad072312e75 --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+ ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
  ForwardAgent yes
