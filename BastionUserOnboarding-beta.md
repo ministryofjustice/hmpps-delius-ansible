@@ -2,6 +2,16 @@
 
 This page explains with examples how a user can be onboarded to use the delius bastion server(s) to gain ssh access to resources within the Delius AWS accounts. (The method of ssh used here is performed over an AWS SSM session).
 
+## Pre-requisites
+Accessing one or both bastions depends on the user having the following pre-requisites.
+- End user responsibilities
+  - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+  - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+  - AWS CLI profile configured for access (with details of accounts and role supplied by a webops engineer)
+  - Tested AWS login using the CLI using MFA
+- Activities performed by a webops engineer
+  - creation of an AWS user account, with MFA configured and programmatic access enabled
+  - AWS user given membership of an IAM group(s) enabling MFA and access to connect to the dev bastion and/or prod bastion
 
 ## General process 
 The general setup process is:
