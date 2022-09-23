@@ -4,21 +4,21 @@ This page explains with examples how a user can be onboarded to use the delius b
 
 ## Pre-requisites
 Accessing one or both bastions depends on the user having the following pre-requisites.
-- End user responsibilities
-  - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-  - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
-  - AWS CLI profile configured for access (with details of accounts and role supplied by a webops engineer)
-  - Tested AWS login using the CLI using MFA
 - Activities performed by a webops engineer
   - creation of an AWS user account, with MFA configured and programmatic access enabled
   - AWS user given membership of an IAM group(s) enabling MFA and access to connect to the dev bastion and/or prod bastion
+- End user responsibilities
+  - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+  - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+  - AWS CLI profile(s) configured for access (with details of AWS account ids and AWS role names supplied by a webops engineer). This will mean correct configuration of the AWS CLI configuration files - see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+  - Tested AWS login using the CLI with MFA, e.g. it should be possible to run `aws ssm describe-instance-information --profile <name of profile(s) set up above>` without error
 
 ## General process 
 The general setup process is:
 1. [SSH Key Pair Generation](#ssh-key-pair-generation) - user creates an SSH key pair for each bastion (dev and/or prod) they would like to access. (The public key is requested from the user by the engineer setting up the access. The private key always remains with the user).
 
-2.  [SSH Config](#ssh-config) - user updates their .ssh/config file
-3.  [User completes bastion setup](#complete-bastion-setup) - logs onto bastion server, changes passwords and deletes control file
+2. [SSH Config](#ssh-config) - user updates their .ssh/config file
+3. [User completes bastion setup](#complete-bastion-setup) - logs onto bastion server, changes passwords and deletes control file
 
 
 ## Helpful other information
@@ -54,6 +54,8 @@ ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
 
 Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs
 Replace `DEV_BASTION_INSTANCE_ID` or `PROD_BASTION_INSTANCE_ID` with the instance ids
+Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account
+Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account
 ```
 Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
@@ -71,7 +73,7 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_dev_rsa
-  ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+  ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 ## MOJ PROD - PRODUCTION DATA ENVS
 Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
@@ -90,7 +92,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
-  ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID  --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+  ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID  --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
 
 * Windows
@@ -109,12 +111,12 @@ Host *
 Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.dsd.io
  Hostname ssh.bastion-dev.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
- ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+ ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
- ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile eng-dev --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+ ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
  ForwardAgent yes
