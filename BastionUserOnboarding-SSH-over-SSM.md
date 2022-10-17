@@ -1,6 +1,26 @@
-# Bastion user onboarding
+# DEV Bastion user instructions - moving over to SSH over SSM method 
 
-This page explains with examples how a user can be onboarded to use the delius bastion server(s) to gain ssh access to resources within the Delius AWS accounts. (The method of ssh used here is performed over an AWS SSM session).
+This page explains the new changes of the delius DEV bastion server and how a user can be onboarded to use the server to gain ssh access to resources within the Delius AWS accounts. (The method of ssh used here is performed over an AWS SSM session).
+
+Note I. For users who already have access to DEV bastion, they will still need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document.
+
+Note II. It is the users' responsibility to go through this document and ensure they update their ssh config setup and test their bastion connection with the new configuration before the set deadline.
+
+After the deadline, Probation WebOps team is going to close port 22 for the DEV bastion server so that users won't be able to connect to DEV bastion anymore through the old method.
+
+A similar process will be performed for PROD bastion later on (TBD) but currently connection to PROD bastion will be done as before (no changes required to the config/method of connecting to the server). Also the section below (SSH Config - PROD Bastion) describes the current SSH config for PROD bastion which does not enable connetion to the PROD bastion server throught the SSH over SSM method. Users with PROD bastion accounts are not required to do any changes to their PROD SSH config for the time being. Probation WebOps team will notify users when PROD bastion changes will take place.
+
+Deadline: 14 November 2022
+
+## Context
+
+During best practice and security scans on the Delius application it was highlighted that the bastion servers have port 22 (SSH) open to the outside world, currently this is necessary for users to SSH onto the bastion servers then jump on to servers within the AWS VPC networks. 
+
+Having port 22 (SSH) open to the outside world and not limited to any specific IP ranges or VPNs is a security risk as anyone across the internet can try to access this server, we do have in place key pair security and password access but to eliminate this risk it is now advised to use the AWS SSM service.
+
+SSM allows you to SSH to the bastion server as you normally do but removes the need for any inbound ports to be open to the outside world, SSM achieves this by having the instance needing SSH access create an outbound connection to the SSM service via an SSM Agent installed on the instance and having a specific SSMInstanceCore policy attached to the instance.
+
+More detail can be found below: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html
 
 ## Pre-requisites
 Accessing one or both bastions depends on the user having the following pre-requisites.
@@ -19,6 +39,7 @@ The general setup process is:
 
 2. [SSH Config](#ssh-config) - user updates their .ssh/config file
 3. [User completes bastion setup](#complete-bastion-setup) - logs onto bastion server, changes passwords and deletes control file
+
 
 
 ## Helpful other information
@@ -48,14 +69,13 @@ ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_dev_rsa
 ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
 ```
 
-## SSH Config
+## SSH Config for DEV bastion
 
 * Mac/Linux
 
 Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs
-Replace `DEV_BASTION_INSTANCE_ID` or `PROD_BASTION_INSTANCE_ID` with the instance ids
+Replace `DEV_BASTION_INSTANCE_ID` with the instance ids
 Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account
-Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account
 ```
 Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
@@ -74,25 +94,6 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_dev_rsa
   ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
-
-## MOJ PROD - PRODUCTION DATA ENVS
-Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
-  User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_prod_rsa
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
-
-Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
-  HostName ssh.bastion-prod.probation.hmpps.dsd.io
-  ControlMaster auto
-  ControlPath /tmp/ctrl_prod_bastion
-  ServerAliveInterval 20
-  ControlPersist 1h
-  ForwardAgent yes
-  User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_prod_rsa
-  ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID  --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
 
 * Windows
@@ -112,11 +113,61 @@ Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.
  Hostname ssh.bastion-dev.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
  ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+```
+
+## SSH Config for PROD bastion
+
+NOTE. The SSH config for higher environments is going to updated later on. For now, below there's the current configuration which does not enable the connection to the PROD bastion through the SSH over SSM method. 
+
+* Mac/Linux
+
+Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs
+Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account
+```
+Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
+  User YOUR_USER_NAME_HERE
+  IdentityFile ~/.ssh/moj_dev_rsa
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_dev_bastion
+
+## MOJ PROD - PRODUCTION DATA ENVS
+Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
+  User YOUR_USER_NAME_HERE
+  IdentityFile ~/.ssh/moj_prod_rsa
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
+
+Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
+  HostName ssh.bastion-prod.probation.hmpps.dsd.io
+  ControlMaster auto
+  ControlPath /tmp/ctrl_prod_bastion
+  ServerAliveInterval 20
+  ControlPersist 1h
+  ForwardAgent yes
+  User YOUR_USER_NAME_HERE
+  IdentityFile ~/.ssh/moj_prod_rsa
+  ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
+```
+
+* Windows
+
+Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. Also replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`). 
+
+Note: this example assumes the user doesn't have any pre-existing SSH config.
+
+```
+Host *
+ User <b>USERNAME</b>
+ ServerAliveInterval 20
+ StrictHostKeyChecking no
+ UserKnownHostsFile /dev/null
 
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
- ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+ ProxyCommand ssh -W %h:%p moj_dev_bastion
 
 Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
  ForwardAgent yes

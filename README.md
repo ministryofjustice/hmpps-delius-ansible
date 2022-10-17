@@ -61,7 +61,7 @@ or
 
 # Notes to assist users.
 
-Please see [the BastionUserOnboarding README](/BastionUserOnboarding.md) for specific information about how to set up access to the dev and/or prod bastion.
+Please see [the BastionUserOnboarding README](/BastionUserOnboarding-SSH-over-SSM.md) for specific information about how to set up access to the dev and/or prod bastion.
 
 ## PRE-COMMIT Hook
 
