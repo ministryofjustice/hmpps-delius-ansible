@@ -154,7 +154,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
-  ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
+  ProxyCommand none
 ```
 
 * Windows
@@ -165,7 +165,7 @@ Note: this example assumes the user doesn't have any pre-existing SSH config.
 
 ```
 Host *
- User <b>USERNAME</b>
+ User <b>USER_NAME</b>
  ServerAliveInterval 20
  StrictHostKeyChecking no
  UserKnownHostsFile /dev/null
@@ -173,7 +173,11 @@ Host *
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+
+Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
+ ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_dev_bastion
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
 
 Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.* 
  ForwardAgent yes
