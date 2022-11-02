@@ -40,7 +40,7 @@ The rest of this page describes how to set up access for the dev and/or prod bas
 - End user responsibilities
   - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
-  - AWS CLI profile(s) configured for access (with details of AWS account ids and AWS role names supplied by a webops engineer). This will mean correct configuration of the AWS CLI configuration files - see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+  - AWS CLI profile(s) configured for access (with details of AWS account ids and AWS role names supplied by a webops engineer). This will mean correct configuration of the AWS CLI configuration files - see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for general information about CLI configuration, with a [specific example here](/BastionUserOnboarding-AWS-CLI-Setup.md)
   - Tested AWS login using the CLI with MFA, e.g. it should be possible to run `aws ssm describe-instance-information --profile <name of profile(s) set up above>` without error
 
 ## General process 
