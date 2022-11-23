@@ -90,7 +90,6 @@ Replace `DEV_BASTION_INSTANCE_ID` with the instance id. You can retrieve the dev
 ```
 aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
 ```
-<br />
 Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account<br /><br />
 
 ```
