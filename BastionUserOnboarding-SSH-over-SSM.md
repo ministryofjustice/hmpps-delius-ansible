@@ -41,7 +41,10 @@ The rest of this page describes how to set up access for the dev and/or prod bas
   - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
   - AWS CLI profile(s) configured for access (with details of AWS account ids and AWS role names supplied by a webops engineer). This will mean correct configuration of the AWS CLI configuration files - see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for general information about CLI configuration, with a [specific example here](/BastionUserOnboarding-AWS-CLI-Setup.md)
-  - Tested AWS login using the CLI with MFA, e.g. it should be possible to run `aws ssm describe-instance-information --profile <name of profile(s) set up above>` without error
+  - Tested AWS login using the CLI with MFA. Run the following AWS CLI command to test your ability to run CLI commands. This command also retrieves the dev bastion instance id (referred to as `DEV_BASTION_INSTANCE_ID`), which is used in later steps
+  ```
+  aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
+  ``` 
 
 ## General process 
 The general setup process is:
@@ -83,7 +86,11 @@ ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
 * Mac/Linux
 
 Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs.<br />
-Replace `DEV_BASTION_INSTANCE_ID` with the instance id.<br />
+Replace `DEV_BASTION_INSTANCE_ID` with the instance id. You can retrieve the dev bastion instance id by running
+```
+aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
+```
+<br />
 Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account<br />
 
 ```
@@ -110,7 +117,10 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
 
 Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs.<br />
 Replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`).<br />
-Replace `DEV_BASTION_INSTANCE_ID` with the instance id.<br />
+Replace `DEV_BASTION_INSTANCE_ID` with the instance id. You can retrieve the dev bastion instance id by running
+```
+aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
+```
 Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account<br />
 
 ```

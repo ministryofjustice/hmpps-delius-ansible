@@ -36,6 +36,9 @@ source_profile = hmpps_token
 ```
 
 ## Create ~/.aws-mfa.sh
+Note that this script depends on the installation of jq - the utility that processes and parses JSON.
+See https://stedolan.github.io/jq/ or for MacOS users, it can be [installed using brew](https://formulae.brew.sh/formula/jq): ```brew install jq```
+
 ```
 #!/usr/bin/env bash
 set -eo pipefail
