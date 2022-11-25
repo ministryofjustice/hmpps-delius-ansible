@@ -1,5 +1,5 @@
 [bastion]
-ssh.bastion-dev.probation.hmpps.dsd.io
+bastion.engineering-dev.internal
 
 [dev]
-ssh.bastion-dev.probation.hmpps.dsd.io
+bastion.engineering-dev.internal
