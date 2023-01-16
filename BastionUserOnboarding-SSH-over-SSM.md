@@ -1,8 +1,11 @@
 # Bastion access user instructions
 - [Bastion access user instructions](#bastion-access-user-instructions)
     - [A note on ssh vs ssh-over-ssm](#a-note-on-ssh-vs-ssh-over-ssm)
-    - [Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022](#deadline-for-dev-bastion-access-cutover-from-ssh-to-ssh-over-ssm-18-november-2022)
-  - [Pre-requisites (dev bastion only - required for ssh-over-ssm)](#pre-requisites-dev-bastion-only---required-for-ssh-over-ssm)
+    - [Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022]
+    (#deadline-for-dev-bastion-access-cutover-from-ssh-to-ssh-over-ssm-18-november-2022)
+    - [Deadline for prod bastion access cutover from ssh to ssh-over-ssm: 14 February 2022]
+    (#deadline-for-prod-bastion-access-cutover-from-ssh-to-ssh-over-ssm-14-February-2022)
+  - [Pre-requisites (required for ssh-over-ssm)](#pre-requisites---required-for-ssh-over-ssm)
   - [General process](#general-process)
   - [Helpful other information](#helpful-other-information)
   - [SSH Key Pair Generation](#ssh-key-pair-generation)
@@ -151,7 +154,7 @@ Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod
 * Mac/Linux
 
 Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs<br />
-Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the dev bastion instance id by running
+Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the prod bastion instance id by running
 ```
 aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
 ```
@@ -181,7 +184,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
 
 Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. <br />
 Replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`).<br />
-Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the dev bastion instance id by running
+Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the prod bastion instance id by running
 ```
 aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
 ```
