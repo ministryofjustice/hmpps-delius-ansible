@@ -188,7 +188,7 @@ Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the pr
 ```
 aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
 ```
-Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Dev Account<br /><br />
+Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account<br /><br />
 
 ```
 Host *
