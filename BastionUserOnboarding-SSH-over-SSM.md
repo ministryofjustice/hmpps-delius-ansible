@@ -1,8 +1,11 @@
 # Bastion access user instructions
 - [Bastion access user instructions](#bastion-access-user-instructions)
     - [A note on ssh vs ssh-over-ssm](#a-note-on-ssh-vs-ssh-over-ssm)
-    - [Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022](#deadline-for-dev-bastion-access-cutover-from-ssh-to-ssh-over-ssm-18-november-2022)
-  - [Pre-requisites (dev bastion only - required for ssh-over-ssm)](#pre-requisites-dev-bastion-only---required-for-ssh-over-ssm)
+    - [Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022]
+    (#deadline-for-dev-bastion-access-cutover-from-ssh-to-ssh-over-ssm-18-november-2022)
+    - [Deadline for prod bastion access cutover from ssh to ssh-over-ssm: 14 February 2022]
+    (#deadline-for-prod-bastion-access-cutover-from-ssh-to-ssh-over-ssm-14-February-2022)
+  - [Pre-requisites (required for ssh-over-ssm)](#pre-requisites---required-for-ssh-over-ssm)
   - [General process](#general-process)
   - [Helpful other information](#helpful-other-information)
   - [SSH Key Pair Generation](#ssh-key-pair-generation)
@@ -18,22 +21,24 @@
 The content on this page is designed to help users obtain ssh access to the dev and/or prod Delius bastion.
 
 ### A note on ssh vs ssh-over-ssm
-We are currently in a transition period where access to the bastions is taking a more secure route, namedly ssh over an AWS SSM connection. The content on this page reflects the current situation at this time in the transition period. This current transition period takes the form of the dev bastion access using ssh-over-ssm, whereas prod bastion access retains the original approach with ssh over public networks. Roll out of ssh-over-ssm to the prod bastion will start when roll out to the dev bastion has been fully completed.
+We are currently in a transition period where access to the bastions is taking a more secure route, namedly ssh over an AWS SSM connection. The content on this page reflects the current situation at this time in the transition period. This current transition period takes the form of the prod bastion access using ssh-over-ssm. Note that roll out of ssh-over-ssm to the dev bastion is already fully completed.
 
-Because of this transition period with dev using ssh-over-ssm and prod still using the original, please note the following.
+Because of this transition period with dev already rolled out of ssh-over-ssm and prod currently rolling out of ssh-over-ssm, please note the following.
 
-Note I. **For users who already have access to dev bastion**, they will still need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document. After the deadline, stated below, port 22 over the public internet for the dev bastion server will cease to work.
+Note I. **For users who already have access to dev bastion**, they will need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document. 
 
-Note II. **For users who already have access to prod bastion**, no changes are needed at this time. Communications will be sent out in due course.
+Note II. **For users who already have access to prod bastion**, they will need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document. After the deadline, stated below, port 22 over the public internet for the prod bastion server will cease to work.
 
 Note III. **It is the users' responsibility to go through this document** and ensure they update their ssh config setup and test their bastion connection with the new configuration before the set deadline.
 
-### Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022
+### Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022 -- step completed
+
+### Deadline for prod bastion access cutover from ssh to ssh-over-ssm: 14 February 2023
 
 The rest of this page describes how to set up access for the dev and/or prod bastion.
 <br /><br /><br />
 
-## Pre-requisites (dev bastion only - required for ssh-over-ssm)
+## Pre-requisites (required for ssh-over-ssm)
 - Activities performed by a webops engineer
   - Ensure user has an AWS user account, with MFA configured and programmatic access enabled 
   - AWS user is a member of the relevant IAM group enabling MFA and access to connect to the bastion
@@ -41,9 +46,13 @@ The rest of this page describes how to set up access for the dev and/or prod bas
   - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   - the Session Manager plugin for the AWS CLI (see https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
   - AWS CLI profile(s) configured for access (with details of AWS account ids and AWS role names supplied by a webops engineer). This will mean correct configuration of the AWS CLI configuration files - see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for general information about CLI configuration, with a [specific example here](/BastionUserOnboarding-AWS-CLI-Setup.md)
-  - Tested AWS login using the CLI with MFA. Run the following AWS CLI command to test your ability to run CLI commands. This command also retrieves the dev bastion instance id (referred to as `DEV_BASTION_INSTANCE_ID`), which is used in later steps
+  - Tested AWS login using the CLI with MFA. Run the following AWS CLI command to test your ability to run CLI commands. This command also retrieves the dev/prod bastion instance id (referred to as `DEV_BASTION_INSTANCE_ID` or `PROD_BASTION_INSTANCE_ID`), which is used in later steps
   ```
   aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
+  ``` 
+  For users with PROD bastion access only, try
+  ```
+  aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
   ``` 
 
 ## General process 
@@ -144,9 +153,14 @@ Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod
 
 * Mac/Linux
 
-Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs
+Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs<br />
+Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the prod bastion instance id by running
 ```
-## MOJ PROD - PRODUCTION DATA ENVS
+aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
+```
+Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account<br /><br />
+
+```
 Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
@@ -163,14 +177,18 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
   IdentityFile ~/.ssh/moj_prod_rsa
-  ProxyCommand none
+  ProxyCommand sh -c "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
 
 * Windows
 
-Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. Also replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`). 
-
-Note: this example assumes the user doesn't have any pre-existing SSH config.
+Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. <br />
+Replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`).<br />
+Replace `PROD_BASTION_INSTANCE_ID` with the instance id. You can retrieve the prod bastion instance id by running
+```
+aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
+```
+Replace `ENG_PROD_PROFILE_NAME` with the AWS CLI profile name you're using to represent the Engineering Prod Account<br /><br />
 
 ```
 Host *
@@ -182,6 +200,7 @@ Host *
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters portNumber=%p"
 
 Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.* 
  ForwardAgent yes
