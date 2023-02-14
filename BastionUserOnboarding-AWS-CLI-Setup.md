@@ -15,6 +15,9 @@ region = eu-west-2
 [profile eng-dev]
 region = eu-west-2
 output = json
+[profile eng-prod]
+region = eu-west-2
+output = json
 ...
 ```
 
