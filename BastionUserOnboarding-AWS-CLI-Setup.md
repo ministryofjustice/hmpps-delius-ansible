@@ -15,11 +15,15 @@ region = eu-west-2
 [profile eng-dev]
 region = eu-west-2
 output = json
+[profile eng-prod]
+region = eu-west-2
+output = json
 ...
 ```
 
 ## Create your ~/.aws.credentials file
-Generate an AWS CLI access Key from the AWS console, then replace <USERNAME>, <ACCESS_KEY_ID>,  <SECRET_ACCESS_KEY>, <ENG_DEV_ACCOUNT_ID> and <HMPPS_PROBATION_ACCOUNT_ID> in the following credentials file:
+Generate an AWS CLI access Key from the AWS console, then replace <USERNAME>, <ACCESS_KEY_ID>,  <SECRET_ACCESS_KEY>, <ENG_DEV_ACCOUNT_ID> and <HMPPS_PROBATION_ACCOUNT_ID> in the following credentials file ($HOME/.aws/credentials):
+
 ```
 [hmpps]
 aws_access_key_id = <ACCESS_KEY_ID>
@@ -31,6 +35,9 @@ aws_secret_access_key = XXX
 aws_session_token = XXX
 [eng-dev]
 role_arn = arn:aws:iam::<ENG_DEV_ACCOUNT_ID>:role/BastionDevSSMUsers
+source_profile = hmpps_token
+[eng-prod]
+role_arn = arn:aws:iam::<ENG_PROD_ACCOUNT_ID>:role/BastionProdSSMUsers
 source_profile = hmpps_token
 ...
 ```
