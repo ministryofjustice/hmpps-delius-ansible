@@ -1,0 +1,7 @@
+# Private IPs hardcoded as dev and prod internal DNS zones only resolvable in specific env
+
+[dev]
+bastion-dev ansible_host=10.161.98.10
+
+[prod]
+bastion-prod ansible_host=10.160.98.4

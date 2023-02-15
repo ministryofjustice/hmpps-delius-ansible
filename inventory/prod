@@ -1,5 +1,0 @@
-[bastion]
-bastion.engineering-prod.internal
-
-[prod]
-bastion.engineering-prod.internal

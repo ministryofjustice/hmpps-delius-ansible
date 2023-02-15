@@ -1,5 +1,0 @@
-[bastion]
-bastion.engineering-dev.internal
-
-[dev]
-bastion.engineering-dev.internal
