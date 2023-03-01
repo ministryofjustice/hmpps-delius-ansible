@@ -1,11 +1,7 @@
 # Bastion access user instructions
 - [Bastion access user instructions](#bastion-access-user-instructions)
-    - [A note on ssh vs ssh-over-ssm](#a-note-on-ssh-vs-ssh-over-ssm)
-    - [Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022]
-    (#deadline-for-dev-bastion-access-cutover-from-ssh-to-ssh-over-ssm-18-november-2022)
-    - [Deadline for prod bastion access cutover from ssh to ssh-over-ssm: 14 February 2022]
-    (#deadline-for-prod-bastion-access-cutover-from-ssh-to-ssh-over-ssm-14-February-2022)
-  - [Pre-requisites (required for ssh-over-ssm)](#pre-requisites---required-for-ssh-over-ssm)
+  - [A note on ssh vs ssh-over-ssm](#a-note-on-ssh-vs-ssh-over-ssm)
+  - [Pre-requisites (required for ssh-over-ssm)](#pre-requisites-required-for-ssh-over-ssm)
   - [General process](#general-process)
   - [Helpful other information](#helpful-other-information)
   - [SSH Key Pair Generation](#ssh-key-pair-generation)
@@ -20,23 +16,9 @@
 
 The content on this page is designed to help users obtain ssh access to the dev and/or prod Delius bastion.
 
-### A note on ssh vs ssh-over-ssm
-We are currently in a transition period where access to the bastions is taking a more secure route, namedly ssh over an AWS SSM connection. The content on this page reflects the current situation at this time in the transition period. This current transition period takes the form of the prod bastion access using ssh-over-ssm. Note that roll out of ssh-over-ssm to the dev bastion is already fully completed.
-
-Because of this transition period with dev already rolled out of ssh-over-ssm and prod currently rolling out of ssh-over-ssm, please note the following.
-
-Note I. **For users who already have access to dev bastion**, they will need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document. 
-
-Note II. **For users who already have access to prod bastion**, they will need to ensure they have the pre-requisites listed below, then they will need to update their SSH config setup and also test their bastion connection as described later on in this document. After the deadline, stated below, port 22 over the public internet for the prod bastion server will cease to work.
-
-Note III. **It is the users' responsibility to go through this document** and ensure they update their ssh config setup and test their bastion connection with the new configuration before the set deadline.
-
-### Deadline for dev bastion access cutover from ssh to ssh-over-ssm: 18 November 2022 -- step completed
-
-### Deadline for prod bastion access cutover from ssh to ssh-over-ssm: 14 February 2023
-
-The rest of this page describes how to set up access for the dev and/or prod bastion.
-<br /><br /><br />
+## A note on ssh vs ssh-over-ssm
+Access to the bastions takes to the form an SSM connection over an AWS SSM session.
+<br />
 
 ## Pre-requisites (required for ssh-over-ssm)
 - Activities performed by a webops engineer

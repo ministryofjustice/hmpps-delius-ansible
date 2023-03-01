@@ -1,9 +1,11 @@
 # hmpps-delius-ansible
 Ansible repo for instance control
 
-# Bastion
+## Bastion access - notes for users
 
-## Adding users
+Please see [the BastionUserOnboarding-SSH-over-SSM README](/BastionUserOnboarding-SSH-over-SSM.md) for specific information about how to set up access to the dev and/or prod bastion.
+
+## Bastion access - engineering notes
 
 First add the user to the file for the correct environment
 
@@ -59,9 +61,6 @@ or
 
 ------
 
-# Notes to assist users.
-
-Please see [the BastionUserOnboarding-SSH-over-SSM README](/BastionUserOnboarding-SSH-over-SSM.md) for specific information about how to set up access to the dev and/or prod bastion.
 
 ## PRE-COMMIT Hook
 
