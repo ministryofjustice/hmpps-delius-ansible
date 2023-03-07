@@ -678,7 +678,7 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: mberridge
+  - username: mberridge2
     name: "Mark Berridge"
     groups:
       - dps
@@ -985,3 +985,4 @@ users_deleted:
   - username: ywilliams
   - username: pdhaliwal
   - username: vcheung
+  - username: mberridge
