@@ -70,7 +70,7 @@ aws configure set aws_session_token $(echo $SESSION_TOKEN | jq -r .Credentials.S
 ## Create an alias for the script
 Ensure you replace <HMPPS_PROBATION_ACCOUNT_ID> and <USERNAME> with appropriate values
 ```
-alias mfa='AWS_PROFILE=hmpps AWS_ACCOUNT_ID=<HMPPS_PROBATION_ACCOUNT_ID> AWS_IAM_USERNAME=<USERNAME> ~/aws-mfa.sh'
+alias mfa='AWS_PROFILE=hmpps AWS_ACCOUNT_ID=<HMPPS_PROBATION_ACCOUNT_ID> AWS_IAM_USERNAME=<USERNAME> ~/.aws-mfa.sh'
 ```
 
 ## Execute the script through the alias to authenticate to AWS
