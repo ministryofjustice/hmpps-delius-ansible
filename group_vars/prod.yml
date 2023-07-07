@@ -711,7 +711,7 @@ users:
     shell: /bin/bash
     update_password: on_create
   
-    - username: dbridgwood
+  - username: dbridgwood
     name: "David Bridgwood"
     groups:
       - dps
