@@ -22,7 +22,7 @@ Access to the bastions takes to the form an SSM connection over an AWS SSM sessi
 
 ## Pre-requisites (required for ssh-over-ssm)
 - Activities performed by a webops engineer
-  - Ensure user has an AWS user account, with MFA configured and programmatic access enabled 
+  - Ensure user has an AWS user account, with MFA configured and programmatic access enabled
   - AWS user is a member of the relevant IAM group enabling MFA and access to connect to the bastion
 - End user responsibilities
   - the AWS CLI installed (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
@@ -31,13 +31,13 @@ Access to the bastions takes to the form an SSM connection over an AWS SSM sessi
   - Tested AWS login using the CLI with MFA. Run the following AWS CLI command to test your ability to run CLI commands. This command also retrieves the dev/prod bastion instance id (referred to as `DEV_BASTION_INSTANCE_ID` or `PROD_BASTION_INSTANCE_ID`), which is used in later steps
   ```
   aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-dev")) | .InstanceId '
-  ``` 
+  ```
   For users with PROD bastion access only, try
   ```
   aws ssm describe-instance-information --profile <your-chosen-aws-profile-name> | jq -c '.InstanceInformationList[] | select(.ComputerName | contains("bastion-prod")) | .InstanceId '
-  ``` 
+  ```
 
-## General process 
+## General process
 The general setup process is:
 1. [SSH Key Pair Generation](#ssh-key-pair-generation) - user creates an SSH key pair for each bastion (dev and/or prod) they would like to access. (The public key is requested from the user by the engineer setting up the access. The private key always remains with the user).
 
@@ -184,7 +184,7 @@ Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hm
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
 ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --target PROD_BASTION_INSTANCE_ID --profile ENG_PROD_PROFILE_NAME --document-name AWS-StartSSHSession --parameters portNumber=%p"
 
-Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.* 
+Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.*
  ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_prod_bastion
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
@@ -194,7 +194,7 @@ Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd
 ## Complete bastion setup
 
 The user should now
-1. Log onto the bastion server, e.g. ```ssh moj_dev_bastion``` or ```ssh moj_prod_bastion``` 
+1. Log onto the bastion server, e.g. ```ssh moj_dev_bastion``` or ```ssh moj_prod_bastion```
 2. Enter initial password and follow prompts to change it immediately
 3. Exit the bastion
 4. [Delete the control file](#delete-the-control-file) as identified by the ControlPath option in the user's ssh config file
@@ -207,7 +207,7 @@ rm /tmp/ctrl_dev_bastion
 /tmp/ctrl_prod_bastion
 ```
 
-### Password expiry 
+### Password expiry
 Password expires after 60 days. To reset after expiry, the user should choose a new password, exit and delete the control file before logging back in.
 
 ### Port-forwarding example
