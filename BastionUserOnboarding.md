@@ -3,7 +3,7 @@
 This page explains with examples how a user can be onboarded to use the delius bastion server(s) to gain ssh access to resources within the Delius AWS accounts.
 
 
-## General process 
+## General process
 The general setup process is:
 1. [SSH Key Pair Generation](#ssh-key-pair-generation) - user creates an SSH key pair for each bastion (dev and/or prod) they would like to access. (The public key is requested from the user by the engineer setting up the access. The private key always remains with the user).
 
@@ -84,7 +84,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
 
 * Windows
 
-Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. Also replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`). 
+Replace `USER_NAME` with your ssh username. This is usually `<first initial><surname>`, e.g. jbloggs. Also replace `HOMEDIR` with the path to the home directory in Windows (e.g. `C:\Users\Joe.Bloggs`).
 
 Note: this example assumes the user doesn't have any pre-existing SSH config.
 
@@ -108,7 +108,7 @@ Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod
  ProxyCommand ssh -W %h:%p moj_dev_bastion
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
 
-Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.* 
+Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.*
  ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_prod_bastion
  IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
@@ -118,7 +118,7 @@ Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd
 ## Complete bastion setup
 
 The user should now
-1. Log onto the bastion server, e.g. ```ssh moj_dev_bastion``` or ```ssh moj_prod_bastion``` 
+1. Log onto the bastion server, e.g. ```ssh moj_dev_bastion``` or ```ssh moj_prod_bastion```
 2. Enter initial password and follow prompts to change it immediately
 3. Exit the bastion
 4. [Delete the control file](#delete-the-control-file) as identified by the ControlPath option in the user's ssh config file
@@ -131,7 +131,7 @@ rm /tmp/ctrl_dev_bastion
 /tmp/ctrl_prod_bastion
 ```
 
-### Password expiry 
+### Password expiry
 Password expires after 60 days. To reset after expiry, the user should choose a new password, exit and delete the control file before logging back in.
 
 ### Port-forwarding example
