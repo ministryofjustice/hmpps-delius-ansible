@@ -1000,6 +1000,17 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: schaudhry
+    name: "Shahzad Chaudhry"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdMjeogp0aKr/zCLKIy9PaIlV3/GOsXuyr2QvHPPQB1 shahzad.chaudhry@digital.justice.gov.uk"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
