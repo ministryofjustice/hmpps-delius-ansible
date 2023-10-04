@@ -1,6 +1,6 @@
-- src: dev-sec.os-hardening
-- src: jeffwidman.yum-cron
+- src: https://github.com/jeffwidman/ansible-yum-cron
 - src: https://github.com/lazzurs/ansible-ssh-hardening
   version: feature/password_key_2fa
 - src: https://github.com/ministryofjustice/ansible-users
-- src: weareinteractive.sudo
+- src: https://github.com/weareinteractive/ansible-sudo
+  version: 1.14.1

@@ -3,6 +3,6 @@
   hosts: all
   roles:
     - ansible-users
-    - jeffwidman.yum-cron
+    - ansible-yum-cron
     - ansible-ssh-hardening
-    - weareinteractive.sudo
+    - ansible-sudo
