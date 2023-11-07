@@ -193,6 +193,8 @@ Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd
 
 ## Complete bastion setup
 
+**Important note: ** Currently Global Protect VPN can break ssh over ssm. Please disable the global protect VPN in the menu bar of your Mac.
+
 The user should now
 1. Log onto the bastion server, e.g. ```ssh moj_dev_bastion``` or ```ssh moj_prod_bastion```
 2. Enter initial password and follow prompts to change it immediately
