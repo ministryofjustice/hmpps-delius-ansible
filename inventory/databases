@@ -1,0 +1,10 @@
+# Private IPs hardcoded as dev and prod internal DNS zones only resolvable in specific env
+
+[dev]
+db1-mis-dev ansible_host=10.162.44.177
+db1-test ansible_host=10.162.12.167
+
+[prod]
+db1-stage ansible_host=10.160.44.184
+db1-pre-prod ansible_host=10.160.12.248
+db1-prod ansible_host=10.160.28.154

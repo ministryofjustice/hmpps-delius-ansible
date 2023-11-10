@@ -1,0 +1,5 @@
+- name: Database
+  become: true
+  hosts: all
+  roles:
+    - ansible-users
