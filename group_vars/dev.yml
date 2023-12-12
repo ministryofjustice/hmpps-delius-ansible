@@ -1051,7 +1051,7 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: spydisetti
+  - username: santoshpydisetti
     name: "Santosh Pydisetti"
     groups:
         - alfresco
@@ -1128,3 +1128,4 @@ users_deleted:
   - username: shorga
   - username: aweetman
   - username: khodgetts
+  - username: spydisetti
