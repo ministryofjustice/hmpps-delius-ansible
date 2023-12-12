@@ -1056,33 +1056,6 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: devwithallgroup
-    name: "Dev with all Group"
-    groups:
-      - adm
-      - wheel
-      - webops
-    ssh-key:
-      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoP2UDJOrSALOy5gmVQyurzrC8OePneyBtN0Z3PrtnpccP+/5CWuTOLVxFiJvRUMrFx9RerP5jYPZo16/x2IX0h1iV1k0Yu/HQVfp8f1EqRCBNKQbaIfm/B737NObI9ehsBVSq0N1ynkqg1tciFkjaFfx9o2TzbwULYaSup1cFhEVIkfNSZH8N7LvCHQT4CmUlEHNi/rYt3abfsP8NGjs/qvt9/63doWO0wEWNr97DFaQM86u2NEK+fY30JL2oKXa83MTIrF//9cAU5CsHik+RvSQpKv2XVWEPvPsUI/iRZYeOUeEX01hGpBI1T1m5pxJxYmyiajYFFCy164QaggIgLv/sLi5UJjys0UDQ4Of+5LhqvTq2WPbIviQku2sLEemeopRwNe+wjH9lggwlCc2bALeRVLBJl4JACQcUvlZdoHrW8Vi1NNDwc2D7U8o7qHcX+7wHsi20ETwxw2TWUd6rhK1VYOGgHsFlATnEKRXabOJtfC13JbWE/rjwqcfJ5WU= prem.basumatary@MJ004262"
-    shell: /bin/bash
-    update_password: on_create
-
-  - username: devwithgroup
-    name: "Dev with Group"
-    groups:
-      - webops
-    ssh-key:
-      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoP2UDJOrSALOy5gmVQyurzrC8OePneyBtN0Z3PrtnpccP+/5CWuTOLVxFiJvRUMrFx9RerP5jYPZo16/x2IX0h1iV1k0Yu/HQVfp8f1EqRCBNKQbaIfm/B737NObI9ehsBVSq0N1ynkqg1tciFkjaFfx9o2TzbwULYaSup1cFhEVIkfNSZH8N7LvCHQT4CmUlEHNi/rYt3abfsP8NGjs/qvt9/63doWO0wEWNr97DFaQM86u2NEK+fY30JL2oKXa83MTIrF//9cAU5CsHik+RvSQpKv2XVWEPvPsUI/iRZYeOUeEX01hGpBI1T1m5pxJxYmyiajYFFCy164QaggIgLv/sLi5UJjys0UDQ4Of+5LhqvTq2WPbIviQku2sLEemeopRwNe+wjH9lggwlCc2bALeRVLBJl4JACQcUvlZdoHrW8Vi1NNDwc2D7U8o7qHcX+7wHsi20ETwxw2TWUd6rhK1VYOGgHsFlATnEKRXabOJtfC13JbWE/rjwqcfJ5WU= prem.basumatary@MJ004262"
-    shell: /bin/bash
-    update_password: on_create
-
-  - username: devnogroup
-    name: "Dev no group"
-    ssh-key:
-      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoP2UDJOrSALOy5gmVQyurzrC8OePneyBtN0Z3PrtnpccP+/5CWuTOLVxFiJvRUMrFx9RerP5jYPZo16/x2IX0h1iV1k0Yu/HQVfp8f1EqRCBNKQbaIfm/B737NObI9ehsBVSq0N1ynkqg1tciFkjaFfx9o2TzbwULYaSup1cFhEVIkfNSZH8N7LvCHQT4CmUlEHNi/rYt3abfsP8NGjs/qvt9/63doWO0wEWNr97DFaQM86u2NEK+fY30JL2oKXa83MTIrF//9cAU5CsHik+RvSQpKv2XVWEPvPsUI/iRZYeOUeEX01hGpBI1T1m5pxJxYmyiajYFFCy164QaggIgLv/sLi5UJjys0UDQ4Of+5LhqvTq2WPbIviQku2sLEemeopRwNe+wjH9lggwlCc2bALeRVLBJl4JACQcUvlZdoHrW8Vi1NNDwc2D7U8o7qHcX+7wHsi20ETwxw2TWUd6rhK1VYOGgHsFlATnEKRXabOJtfC13JbWE/rjwqcfJ5WU= prem.basumatary@MJ004262"
-    shell: /bin/bash
-    update_password: on_create
-
 users_deleted:
   - username: ec2-user
   - username: centos
@@ -1124,3 +1097,6 @@ users_deleted:
   - username: shorga
   - username: aweetman
   - username: khodgetts
+  - username: devwithallgroup
+  - username: devwithgroup
+  - username: devnogroup
