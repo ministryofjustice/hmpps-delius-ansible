@@ -19,7 +19,7 @@ def run_ansible(environment_type) {
             -v $SSH_AUTH_SOCK:/ssh-agent \
             -e SSH_AUTH_SOCK=/ssh-agent \
             mojdigitalstudio/hmpps-ansible-builder:0.40.0 bash -c \"ansible-galaxy install -r requirements.yml && \
-             ansible-playbook -vvvv -u jenkins --ssh-extra-args='-o StrictHostKeyChecking=no' -i inventory/bastions -l ${environment_type} bastion.yml && \
+             ansible-playbook -u jenkins --ssh-extra-args='-o StrictHostKeyChecking=no' -i inventory/bastions -l ${environment_type} bastion.yml && \
              ansible-playbook -u jenkins --ssh-extra-args='-o StrictHostKeyChecking=no' -i inventory/databases -l ${environment_type} database.yml\"
             set -x
         """
