@@ -68,8 +68,8 @@ ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
 mkdir %USERPROFILE%/.ssh
 
 # Generate dev and prod keypairs
-ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_dev_rsa
-ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
+ssh-keygen -t rsa -b ed25519 -f %USERPROFILE%/.ssh/moj_dev_rsa
+ssh-keygen -t rsa -b ed25519 -f %USERPROFILE%/.ssh/moj_prod_rsa
 ```
 
 ## SSH Config for DEV bastion
