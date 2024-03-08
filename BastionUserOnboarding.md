@@ -22,10 +22,10 @@ The general setup process is:
 * Mac/Linux
 ```bash
 # Dev bastion - for accessing **non-prod** environments
-ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_dev_rsa
+ssh-keygen -t ed25519 -f ~/.ssh/moj_dev
 
 # Prod bastion - for accessing **prod** environments
-ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
+ssh-keygen -t ed25519 -f ~/.ssh/moj_prod
 ```
 
 * Windows
@@ -34,8 +34,8 @@ ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
 mkdir %USERPROFILE%/.ssh
 
 # Generate dev and prod keypairs
-ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_dev_rsa
-ssh-keygen -t rsa -b 16384 -f %USERPROFILE%/.ssh/moj_prod_rsa
+ssh-keygen ed25519 -f %USERPROFILE%/.ssh/moj_dev
+ssh-keygen ed25519 -f %USERPROFILE%/.ssh/moj_prod
 ```
 
 ## SSH Config
@@ -46,7 +46,7 @@ Replace `YOUR_USER_NAME_HERE` with your ssh username. This is usually `<first in
 ```
 Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_dev_rsa
+  IdentityFile ~/.ssh/moj_dev
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_dev_bastion
@@ -59,13 +59,13 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   ControlPersist 1h
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_dev_rsa
+  IdentityFile ~/.ssh/moj_dev
   ProxyCommand none
 
 ## MOJ PROD - PRODUCTION DATA ENVS
 Host *.probation.service.justice.gov.uk *.pre-prod.delius.probation.hmpps.dsd.io *.stage.delius.probation.hmpps.dsd.io 10.160.*
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_prod_rsa
+  IdentityFile ~/.ssh/moj_prod
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_prod_bastion
@@ -78,7 +78,7 @@ Host ssh.bastion-prod.probation.hmpps.dsd.io moj_prod_bastion awsprodgw
   ControlPersist 1h
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_prod_rsa
+  IdentityFile ~/.ssh/moj_prod
   ProxyCommand none
 ```
 
@@ -97,21 +97,21 @@ Host *
 
 Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.dsd.io
  Hostname ssh.bastion-dev.probation.hmpps.dsd.io
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev
 
 Host awsprodgw moj_prod_jump_host moj_prod_bastion ssh.bastion-prod.probation.hmpps.dsd.io
  Hostname ssh.bastion-prod.probation.hmpps.dsd.io
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod
 
 Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
  ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_dev_bastion
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev
 
 Host *.stage.delius.probation.hmpps.dsd.io *.pre-prod.delius.probation.hmpps.dsd.io *.perf.delius.probation.hmpps.dsd.io *.probation.service.justice.gov.uk 10.160.?.* 10.160.1?.* 10.160.2?.* 10.160.3?.* 10.160.4?.* 10.160.5?.*
  ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_prod_bastion
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_prod
 ```
 
 
