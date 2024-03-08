@@ -56,10 +56,10 @@ The general setup process is:
 * Mac/Linux
 ```bash
 # Dev bastion - for accessing **non-prod** environments
-ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_dev_rsa
+ssh-keygen -t ed25519 -f ~/.ssh/moj_dev
 
 # Prod bastion - for accessing **prod** environments
-ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
+ssh-keygen -t ed25519 -f ~/.ssh/moj_prod
 ```
 
 * Windows
@@ -68,8 +68,8 @@ ssh-keygen -t rsa -b 16384 -f ~/.ssh/moj_prod_rsa
 mkdir %USERPROFILE%/.ssh
 
 # Generate dev and prod keypairs
-ssh-keygen -t ed25519 -f %USERPROFILE%/.ssh/moj_dev_rsa
-ssh-keygen -t ed25519 -f %USERPROFILE%/.ssh/moj_prod_rsa
+ssh-keygen -t ed25519 -f %USERPROFILE%/.ssh/moj_dev
+ssh-keygen -t ed25519 -f %USERPROFILE%/.ssh/moj_prod
 ```
 
 ## SSH Config for DEV bastion
@@ -86,7 +86,7 @@ Replace `ENG_DEV_PROFILE_NAME` with the AWS CLI profile name you're using to rep
 ```
 Host *.delius-core-dev.internal *.delius.probation.hmpps.dsd.io *.delius-core.probation.hmpps.dsd.io 10.161.* 10.162.* !*.pre-prod.delius.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_dev_rsa
+  IdentityFile ~/.ssh/moj_dev
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   ProxyCommand ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p moj_dev_bastion
@@ -99,7 +99,7 @@ Host ssh.bastion-dev.probation.hmpps.dsd.io moj_dev_bastion awsdevgw
   ControlPersist 1h
   ForwardAgent yes
   User YOUR_USER_NAME_HERE
-  IdentityFile ~/.ssh/moj_dev_rsa
+  IdentityFile ~/.ssh/moj_dev
   ProxyCommand sh -c "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
 
@@ -122,13 +122,13 @@ Host *
 
 Host awsdevgw moj_dev_jump_host moj_dev_bastion ssh.bastion-dev.probation.hmpps.dsd.io
  Hostname ssh.bastion-dev.probation.hmpps.dsd.io
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev
  ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --target DEV_BASTION_INSTANCE_ID --profile ENG_DEV_PROFILE_NAME --document-name AWS-StartSSHSession --parameters portNumber=%p"
 
 Host *.probation.hmpps.dsd.io !*.stage.delius.probation.hmpps.dsd.io !*.pre-prod.delius.probation.hmpps.dsd.io !*.perf.delius.probation.hmpps.dsd.io 10.16* !10.160.?.* !10.160.1?.* !10.160.2?.* !10.160.3?.* !10.160.4?.* !10.160.5?.*
  ForwardAgent yes
  ProxyCommand ssh -W %h:%p moj_dev_bastion
- IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev_rsa
+ IdentityFile <b>HOMEDIR</b>\.ssh\moj_dev
 ```
 
 ## SSH Config for PROD bastion
