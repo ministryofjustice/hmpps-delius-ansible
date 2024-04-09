@@ -1076,6 +1076,13 @@ users:
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNm8mwfIgdNIzMpYpF8TqGrISCFX7/3bATXQq5k1T+l gary.reid@MJ004229"
     shell: /bin/bash
+    update_password: on _create
+
+  - username: meladbulla
+    name: Muhammad El Abdulla
+    ssh-key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ1h9G70hoQwfHYnEGvhaccMize8GL5c9QC61TmaOToh mohamed.elabdulla@MJ004413"
+    shell: /bin/bash
     update_password: on_create
 
 users_deleted:
@@ -1119,5 +1126,6 @@ users_deleted:
   - username: shorga
   - username: aweetman
   - username: khodgetts
+  - username: test_user
   - username: ioluyomi
   - username: schaudhry
