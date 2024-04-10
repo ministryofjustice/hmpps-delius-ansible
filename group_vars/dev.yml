@@ -1076,7 +1076,7 @@ users:
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNm8mwfIgdNIzMpYpF8TqGrISCFX7/3bATXQq5k1T+l gary.reid@MJ004229"
     shell: /bin/bash
-    update_password: on _create
+    update_password: on_create
 
   - username: meladbulla
     name: Muhammad El Abdulla
