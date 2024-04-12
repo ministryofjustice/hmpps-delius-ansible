@@ -21,7 +21,6 @@ groups_to_create:
   - name: probation-integration
     gid: 11000
 
-
 users:
   # /dev/jenkins/hmpps/integration/user/name
   - username: hmpps_integration_test
@@ -1091,6 +1090,15 @@ users:
       - version1
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKwc0FJt745CL6insUnLXAg6BR9FLJSpRTkmA+nA6wxE hrishikesh.gawde@MJ004698"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: msachdeva
+    name: "Manpreet Sachedeva"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMFUwyaSF79f/Ur5lGeETchtekC8YNMDCS8IL9t5WYw3 manpreet.sachdeva@MJ004025"
     shell: /bin/bash
     update_password: on_create
 
