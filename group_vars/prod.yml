@@ -909,6 +909,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: pmcphee
+    name: "Paul McPhee"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH6JNJoY6+bqqpw1wlFHGGrwZ6MTE2nL6G6XMrsW4dw4 paul.mcphee@MJ003755"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
