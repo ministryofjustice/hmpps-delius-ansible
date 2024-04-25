@@ -906,6 +906,8 @@ users:
       - version1
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII41k2halsoobwYUVnn/9L0A9TgQURuaOvn4afiP5+UI manpreet.sachdeva@MJ004025"
+    shell: /bin/bash
+    update_password: on_create
 
   - username: pmcphee
     name: "Paul McPhee"
