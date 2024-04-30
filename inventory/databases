@@ -7,4 +7,7 @@ db1-test ansible_host=10.162.12.167
 [prod]
 db1-stage ansible_host=10.160.44.184
 db1-pre-prod ansible_host=10.160.12.248
+db2-pre-prod ansible_host=10.160.13.203
 db1-prod ansible_host=10.160.28.154
+db2-prod ansible_host=10.160.29.62
+db3-prod ansible_host=10.160.30.90
