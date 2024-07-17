@@ -1095,6 +1095,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: tmanassis
+    name: "Theodoros Manassis"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINJFPwwN1BGkVYxe04bp7V1Y/XQ+DwxotPhvOktIvkx6 theodorosmanassis@MJ003967"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
@@ -1140,4 +1147,3 @@ users_deleted:
   - username: ioluyomi
   - username: schaudhry
   - username: rmehta
-    
