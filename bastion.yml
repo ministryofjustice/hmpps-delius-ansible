@@ -4,5 +4,4 @@
   roles:
     - ansible-users
     - ansible-yum-cron
-    - ansible-ssh-hardening
     - ansible-sudo
