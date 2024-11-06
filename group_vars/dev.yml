@@ -1069,6 +1069,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: kmilligan
+    name: "Keith Milligan"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSxB4M+UbqF+ChBaRJFBC24u8oAED/+/uW6WDpTTNV6 keith.milligan@digital.justice.gov.uk"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
