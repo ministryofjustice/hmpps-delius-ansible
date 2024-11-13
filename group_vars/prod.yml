@@ -883,6 +883,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: kmilligan
+    name: "Keith Milligan"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWBH5bkjtCu+Q8IWrgLSlEowg+e0CSj+PJ7vrgNNk8x moj_prod"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
