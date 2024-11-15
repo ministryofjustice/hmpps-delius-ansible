@@ -1076,6 +1076,15 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: tdevokolot
+    name: "Tephraste Devokolot"
+    groups:
+      - vcms
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzQO72txjwrkTuMDKJdG7FwWUNYQWaCXK2+Uqn7Cdi7 Tephraste.Devokolot@SDCVCMSDEV01"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
