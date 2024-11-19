@@ -21,7 +21,7 @@ output = json
 ...
 ```
 
-## Create your ~/.aws.credentials file
+## Create your ~/.aws/credentials file
 Generate an AWS CLI access Key from the AWS console, then replace <USERNAME>, <ACCESS_KEY_ID>,  <SECRET_ACCESS_KEY>, <ENG_DEV_ACCOUNT_ID> and <HMPPS_PROBATION_ACCOUNT_ID> in the following credentials file ($HOME/.aws/credentials):
 
 ```
