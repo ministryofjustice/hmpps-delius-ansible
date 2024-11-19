@@ -1085,6 +1085,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: mnarne
+    name: "Murali Narne"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN81C+RSiIgkfYxCVvUO+MvbGgjWzygm9RPAsywz4FoB murali.narne@MJ004227"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
