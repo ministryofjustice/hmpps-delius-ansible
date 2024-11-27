@@ -1092,6 +1092,15 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: mavalakki
+    name: "Mrunalini Avalakki"
+    groups:
+      - mis
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1+veYfVm0aOhrW2NM9WejthwXxs3RBS9IF8NSeHfpZ mrunalini.avalakki@MJ004162"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
