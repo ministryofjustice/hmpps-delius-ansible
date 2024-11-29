@@ -1101,7 +1101,7 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: Amariemacdonald
+  - username: amariemacdonald
     name: "Ann Marie Macdonald"
     groups:
       - adm
