@@ -915,6 +915,31 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: Amariemacdonald
+    name: "Ann Marie Macdonald"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxKkdB+QiegbzTgUE3xKEpNaXXK56iVLtWQ7FzWWNMc ann.mariemacdonald@MJ006824"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: acraik
+    name: "Andrew Craik"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAu5wuWY7glzIRafherMtnna0QJGtOV1TJwNpiyItAmz andrew.craik@L1203"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: gwheeler
+    name: "Guy Wheeler"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJG5J6OyS63//E7+uB3RUOEpMXZDLH9uhTk6dP7bsaVt guy.wheeler@MJ004170"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
