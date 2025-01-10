@@ -940,6 +940,17 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+- username: dbelton
+    name: "David Belton"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPY/9Db07H6lJzBSK4jfGIgzKF1DZ6nnAh4K8Ps32W4R david.belton@MJ006966"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
