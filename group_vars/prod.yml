@@ -940,7 +940,7 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-- username: davidbelton
+- username: dbelton
     name: "David Belton"
     groups:
       - adm
