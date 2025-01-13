@@ -1137,6 +1137,17 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+- username: dteeling
+    name: "David Teeling"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2wsGG4ARua0lelKw4Z5H1ossWVvrxFK8KhpgJBIguZ david.teeling@MJ006958"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
