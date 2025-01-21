@@ -933,16 +933,6 @@ users:
     shell: /bin/bash
     update_password: on_create
 
-  - username: gtaylor
-    groups:
-      - adm
-      - wheel
-      - webops
-    ssh_key:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC8w4TJyq54U9nHfIPwj/ynKe9r4h97VaHtPQgZhZq0f"
-    shell: /bin/bash
-    update_password: on_create
-
   - username: jrobson
     name: "James Robson"
     groups:
@@ -1188,3 +1178,4 @@ users_deleted:
   - username: pmaddini
   - username: rkotha
   - username: pydisettis
+  - username: gtaylor
