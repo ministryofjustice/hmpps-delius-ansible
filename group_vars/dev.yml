@@ -1129,6 +1129,15 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: lporter
+    name: "Lee Porter"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPl5VREs8RKfcjMCH0ojgUp00HWo2+vvNmlzsEMPOLgb lee.porter@MJ007035"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
