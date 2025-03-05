@@ -1129,6 +1129,17 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: kwilliams
+    name: "Keir Williams"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMuKyxPFfTF/1mFfoGzUiKbuzja+j/TCiKdxrsK+aBiw"
+    shell: /bin/bash
+    update_password: on_create
+
   - username: lporter
     name: "Lee Porter"
     groups:
