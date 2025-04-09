@@ -913,6 +913,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: lnagarur
+    name: "LalithaNagarur"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAc5jpzJUTUnHELay7nSiItwuS19SbXCrehWTKQT2xch lalitha.nagarur@MJ003939"
+    shell: /bin/bash
+    update_password: on_create
+
   - username: gwheeler
     name: "Guy Wheeler"
     ssh_key:
