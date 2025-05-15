@@ -1145,6 +1145,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: sbathina
+    name: "Siva Bathina"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOM5xl0Ygn1o9/Dc5z29TQdaYPvCgFqjZCdN2aR0tmJ siva.bathina@MJ004028"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
