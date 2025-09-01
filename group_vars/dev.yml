@@ -1155,6 +1155,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: dpatel
+    name: "Dhruv Patel"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIfiJYgCVJUwUymzl4kl7qiEaH8w5Gr+fu7ETeMcBGpH dhruv.patel@MJ004397"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
