@@ -961,6 +961,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: jkojosiaw
+    name: "J Kojo Siaw"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVAUgGIPWJyHKGdXzDSEoiICRmRqeLgjoP7bJq5i0wN dom1\afh95q@MMD7Z69384"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
