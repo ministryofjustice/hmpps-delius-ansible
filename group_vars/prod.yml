@@ -968,6 +968,17 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: drobinson
+    name: "Dominic Robinson"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMmybIRrtx8sU+/7+d9s7RppiZv+UTgszC9Ed7NqOMYBI5D6lD32AJQmDgDvHWZtmt1PCq5SLkkrz8wVqKkKewTtsf7AZ8Nb8B2NBcKNvKeASgljE/cLpPm/zoRndID9qEsSfmZVYsp+C7QrS9O0PIUUDgnhZyN73LsAzRH3G2GSvoT4wvrHcftiMP6Cg9/Nc+JZZQ1SW8CTIOlvxSN3C0Rxw++WUIbwD2Hur9utMqHQvViR8GfAf7Du2YPwwgUEWYP7exC4e5YMyQbxEjVeKM/gF7KNygEeev4kpl0KMQw1vMF6IsXr6ffZygypIB/E7duCUnb50wwp3BdpLfEXthiul1+0z7OFnbCNejiC5GNShLV2UzwLCyVabQUTFbQnoHlSGHbtC6CCTYZei/l20djd1PDDhBCIViveZBM3vyv+APkEZwyE7/idy0wS4190dwpTJwVr6AmxgN9SBbv5BpXhlWZu628bo8tI9JoeXHistanfSi6xLmzRCLuRJeknE="
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
