@@ -979,6 +979,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: mgrant
+    name: "Marie Grant"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBtSR7dHY3bi4+SQ7v/tgwsQhDw/dM7x6f7e4NLAhK8J maire.grant@MJ005929"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
