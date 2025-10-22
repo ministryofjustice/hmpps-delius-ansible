@@ -1174,7 +1174,7 @@ users:
     update_password: on_create
 
   - username: mgrant
-    name: "Marie Grant"
+    name: "Maire Grant"
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGA9G1xt++Zx2ksgyV59/U2Vg5+1qm8h7iM6mUSzqq+w maire.grant@MJ005929"
     shell: /bin/bash
