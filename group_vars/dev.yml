@@ -1196,6 +1196,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: mbritt
+    name: "Merlin Britt"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKjHjDp7zKBktsSvJdFPgxGM+PNkDEHA8J/qJpZAWXP merlin.britt@MJ006042"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
