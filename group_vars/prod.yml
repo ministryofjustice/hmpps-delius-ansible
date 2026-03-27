@@ -1002,6 +1002,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: mbritt
+    name: "Merlin Britt"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLmMeLczcs3pZB8HSRXP8o9MIvXwHx+1PYqL67fwcEq merlin.britt@MJ006042"
+    shell: /bin/bash
+    update_password: on_create
+    
   - username: ghill
     name: "George Hill"
     groups:
