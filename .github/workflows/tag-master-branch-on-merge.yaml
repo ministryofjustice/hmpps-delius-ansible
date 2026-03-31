@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.62.0
+      uses: anothrNick/github-tag-action@d77194f92b4ca48b05df5c20709984535a9cd6e0 # 1.62.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REPO_OWNER: ministryofjustice
