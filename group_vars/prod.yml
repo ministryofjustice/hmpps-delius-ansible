@@ -1020,6 +1020,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: ascott
+    name: "Antony Scott"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAnuKG9d6LfrBYjvCMUfQ1oQAm1ABz5i31vHcMc4WBLt anthony.scott@MJ004623"
+    shell: /bin/bash
+    update_password: on_create
+
 users_deleted:
   - username: ec2-user
   - username: centos
