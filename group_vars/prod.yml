@@ -1008,7 +1008,7 @@ users:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLmMeLczcs3pZB8HSRXP8o9MIvXwHx+1PYqL67fwcEq merlin.britt@MJ006042"
     shell: /bin/bash
     update_password: on_create
-    
+
   - username: ghill
     name: "George Hill"
     groups:
@@ -1024,6 +1024,39 @@ users:
     name: "Antony Scott"
     ssh_key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAnuKG9d6LfrBYjvCMUfQ1oQAm1ABz5i31vHcMc4WBLt anthony.scott@MJ004623"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: amariyam
+    name: "Annesa Mariyam"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL2i5eVL0zlzlpwYr3JzwLeq3nmDKtBufmj3abrmfHxz"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: dkent
+    name: "Dave Kent"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIACpEAMJ+xe2+cDY0PCoUAmMblgTmucuXAlR1EG5w86m"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: wgibbon
+    name: "William Gibbon"
+    groups:
+      - adm
+      - wheel
+      - webops
+    ssh_key:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDD3QgZ3bhYFSsSmKjHsNhLNB9rcwwKyjFX36V6ndJdcWzOkQWAVnPJi3+g0F4VvtpomCumSB2AwkWGqZs62jzVjv6ybOxU1XewzfWs2AkgjwgL1x1iihSR3RzJeEnz6CuInrhmOFyHauJjJHAtk4g4T56n5MkGTR2Zh8o2EV2ioU88Yq4BBlg917Le7+j//l2iG1BqGtz4J6X9CI/xLaQiqi/EF+Uk9RD8uH1DnNCca5auSHoRirb6t3lotcm4HsEdzwHxaMLupC/gYUyr5r9TYqnJpaYICPNkmsbkLHc91kdCMR8MRn3xX5Eh6QwfxhbjutN82rWnTwAzxEnJ+CZ05dsxAgGsukkmS4gRVx2VVQtpuTNK+kQo36heAoeFBZ5Xu4SFSC8leClG4S0QVRdax5Nhmj1CahGXTXOT+w7l18wHMU/El4+QRvSBf6W86gcoq04CLJBfdX6UVkolJxNB312+MUv5zKnyXHjcMjfLdk70QkD0h5m7c08pK6keWVc="
     shell: /bin/bash
     update_password: on_create
 
