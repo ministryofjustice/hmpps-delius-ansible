@@ -907,6 +907,13 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: jphillips
+    name: "Joseph Phillips"
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEa8IK0YO+bkSJdnaa6SHcKP5YU/UG2sTHvNU8Ogd839 joseph.phillips@MJ006086"
+    shell: /bin/bash
+    update_password: on_create
+
   - username: gwheeler
     name: "Guy Wheeler"
     ssh_key:
