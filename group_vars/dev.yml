@@ -1192,7 +1192,7 @@ users:
   - username: nbutt
     name: "Nasir Butt"
     ssh_key:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChm7lJkRfypF8fSYaDce4RIkH1stDRzRh2sKuw8kkSV unisoft\nasir.butt@UL-A-7L6TGD4"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChm7lJkRfypF8fSYaDce4RIkH1stDRzRh2sKuw8kkSV nasir.butt@UL-A-7L6TGD4"
     shell: /bin/bash
     update_password: on_create
 
