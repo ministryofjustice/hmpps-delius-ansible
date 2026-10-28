@@ -1143,6 +1143,24 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: jsmithson
+    name: "Jamie Smithson"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBemEwc+iwvQRfOGC23NeAlV6jp6mhW3k7cgKah0BlTP"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: sahmed
+    name: "Sumaiya Ahmed"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPy1fwq8uXuyrz6buNdtwL42SEmsYxljRXkpW1RT4fAm sumaiya.ahmed@MJ005047"
+    shell: /bin/bash
+    update_password: on_create
+
   - username: sbathina
     name: "Siva Bathina"
     ssh_key:
