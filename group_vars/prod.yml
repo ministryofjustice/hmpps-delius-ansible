@@ -963,6 +963,24 @@ users:
     shell: /bin/bash
     update_password: on_create
 
+  - username: jsmithson
+    name: "Jamie Smithson"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJPjyvGoC3IFJT8W5jrRHDxfrgCrggQAJ0QJMOFw2cT"
+    shell: /bin/bash
+    update_password: on_create
+
+  - username: sahmed
+    name: "Sumaiya Ahmed"
+    groups:
+      - version1
+    ssh_key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkinnqy1xAF/u7IP876qJkwBWVHOlLCeARUQg6RlKyF sumaiya.ahmed@MJ005047"
+    shell: /bin/bash
+    update_password: on_create
+
   - username: abrown
     name: "Alexander Brown"
     ssh_key:
